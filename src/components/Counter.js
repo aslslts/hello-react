@@ -1,3 +1,4 @@
+import { clear } from "@testing-library/user-event/dist/clear";
 import React, { useState, useEffect } from "react";
 
 function Counter() {
@@ -5,20 +6,13 @@ function Counter() {
   const [amount, setAmount] = useState(1);
 
   useEffect(() => {
-    // console.log("Bir state değişti");
-  });
+    let interval = setInterval(() => {
+      console.log("interval");
+      setCount((prev) => prev + 1);
+    }, 1000);
 
-  useEffect(() => {
-    console.log("Component mount edildi");
+    return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    console.log("Count state değişti");
-  }, [count]);
-
-  useEffect(() => {
-    console.log("Amount state değişti");
-  }, [amount]);
 
   return (
     <div>
